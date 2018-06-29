@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67e8da0e-d7b3-46ed-80e3-f60ae9d90c9c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PuzzleSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PuzzleSolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EPSingleState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EPSingleState.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,12 +35,13 @@
       <file leaf-file-name="EPSingleState.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EPSingleState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="642">
-              <caret line="80" column="5" lean-forward="true" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+            <state relative-caret-position="666">
+              <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#588#589#0" expanded="true" />
                 <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#933#944#0" expanded="true" />
                 <element signature="e#1093#1094#0" expanded="true" />
                 <element signature="e#1128#1129#0" expanded="true" />
               </folding>
@@ -198,12 +198,12 @@
       <updated>1527964115359</updated>
       <workItem from="1527964118151" duration="2119000" />
       <workItem from="1530128333834" duration="4513000" />
-      <workItem from="1530250301706" duration="2095000" />
+      <workItem from="1530250301706" duration="3723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8727000" />
+    <option name="totallyTimeSpent" value="10355000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1922" height="1085" extended-state="6" />
@@ -268,6 +268,7 @@
             <element signature="imports" expanded="true" />
             <element signature="e#588#589#0" expanded="true" />
             <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#933#944#0" expanded="true" />
             <element signature="e#1093#1094#0" expanded="true" />
             <element signature="e#1128#1129#0" expanded="true" />
           </folding>
@@ -300,12 +301,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EPSingleState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="642">
-          <caret line="80" column="5" lean-forward="true" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        <state relative-caret-position="666">
+          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#588#589#0" expanded="true" />
             <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#933#944#0" expanded="true" />
             <element signature="e#1093#1094#0" expanded="true" />
             <element signature="e#1128#1129#0" expanded="true" />
           </folding>

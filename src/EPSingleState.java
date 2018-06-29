@@ -40,8 +40,36 @@ public class EPSingleState implements StateInfo {
 
     @Override
     public ArrayList<StateInfo> getSuccessors() {
+        int holeIdx=getHoleIndex();
 
-        return null;
+        ArrayList<StateInfo> successors= new ArrayList<StateInfo>();
+
+        if(holeIdx !=0 && holeIdx !=3 && holeIdx !=6){
+            swapAndStore(holeIdx-1,holeIdx,successors);
+        }
+
+        if(holeIdx !=2 && holeIdx !=5 && holeIdx !=8){
+            swapAndStore(holeIdx+1,holeIdx,successors);
+        }
+
+        if(holeIdx !=0 && holeIdx !=1 && holeIdx !=2){
+            swapAndStore(holeIdx-3,holeIdx,successors);
+        }
+
+        if(holeIdx !=6 && holeIdx !=7 && holeIdx !=8){
+            swapAndStore(holeIdx+3,holeIdx,successors);
+        }
+
+        return successors;
+    }
+
+    private void swapAndStore(int s,int c,ArrayList<StateInfo> state){
+
+        int[] cpy= copyBoard(currentBoard);
+        int temp=cpy[s];
+        cpy[s]=currentBoard[c];
+        cpy[c]=temp;
+        state.add(new EPSingleState(cpy));
     }
 
     @Override
