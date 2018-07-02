@@ -8,6 +8,8 @@ public class EPSingleState implements StateInfo {
 
     private int OutofOrder=0;
 
+    private double ManhattanDist=0;
+
     private final int[] Goal={1,2,3,4,5,6,7,8,0};
 
     private int[] currentBoard;
@@ -26,7 +28,34 @@ public class EPSingleState implements StateInfo {
         }
     }
 
-    public int getOutOfOrderValue(){
+    private void setManhattanDistance(){
+
+        int idx=-1;
+        for (int i = 0; i < 3 ; i++) {
+
+            for (int j = 0; j < 3 ; j++) {
+
+                idx++;
+
+                int val=currentBoard[idx]-1;
+
+                if(val!=-1){
+                    int horix= val%3;
+                    int verty= val/3;
+
+                    ManhattanDist+= Math.abs(horix - j)+ Math.abs(verty - i);
+                }
+
+            }
+
+        }
+    }
+
+    public double getManhattanDistance(){
+        return ManhattanDist;
+    }
+
+    public double getOutOfOrderValue(){
         return OutofOrder;
     }
 
@@ -73,8 +102,9 @@ public class EPSingleState implements StateInfo {
     }
 
     @Override
-    public double getCost() {
-        return 0;
+    public double findCost() {
+
+        return 1;
     }
 
     @Override
@@ -84,6 +114,20 @@ public class EPSingleState implements StateInfo {
         }
 
         return false;
+    }
+
+    @Override
+    public void printState()
+    {
+        System.out.println(currentBoard[0] + " | " + currentBoard[1] + " | "
+                + currentBoard[2]);
+        System.out.println("---------");
+        System.out.println(currentBoard[3] + " | " + currentBoard[4] + " | "
+                + currentBoard[5]);
+        System.out.println("---------");
+        System.out.println(currentBoard[6] + " | " + currentBoard[7] + " | "
+                + currentBoard[8]);
+
     }
 
     public int[] getCurBoard()
@@ -107,6 +151,7 @@ public class EPSingleState implements StateInfo {
         }
         return holeIdx;
     }
+
 
 
 }

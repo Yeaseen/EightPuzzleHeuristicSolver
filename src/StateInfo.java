@@ -5,7 +5,9 @@ public interface StateInfo {
 
     ArrayList<StateInfo> getSuccessors();
 
-    double getCost();
+    double findCost();
 
     boolean equals(StateInfo s);
+
+    void printState();
 }
