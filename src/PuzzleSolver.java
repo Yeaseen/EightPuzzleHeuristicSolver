@@ -1,35 +1,29 @@
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class PuzzleSolver {
 
+
+
     public static void main(String[] args) {
 
-        System.out.println(args[0]);
+
+        int heur=Integer.parseInt(args[0]);
 
 
 
         int[] startingStateBoard=dispatchEightPuzzle(args,1);
 
-        EPSingleState s= new EPSingleState(startingStateBoard);
-        s.printState();
+        //EPSingleState s= new EPSingleState(startingStateBoard);
+        //double x=s.getnMaxCost();
+        //System.out.println(x);
 
-        AStarSearch(startingStateBoard,1);
-
-        System.out.println("done");
-
-        //for (int i = 0; i <startingStateBoard.length ; i++) {
-        //    System.out.printf(startingStateBoard[i]+" ");
-        //}
-
+        AStarSearch(startingStateBoard,heur);
 
     }
 
     public static void AStarSearch(int[] board, int heur){
-        System.out.println("Astar");
+        //System.out.println("Astar");
 
         StoredNode root = new StoredNode(new EPSingleState(board));
 
@@ -39,17 +33,17 @@ public class PuzzleSolver {
         int stateCounter=1;
 
         while(!q.isEmpty()){
-            System.out.println("in q");
+            //System.out.println("in q");
             StoredNode temp =(StoredNode) q.poll();
 
             if(!temp.getCurrentStae().isGoal()){
-
+                //System.out.println("1");
                 ArrayList<StateInfo> tempSuccessors= temp.getCurrentStae().getSuccessors();
-
+                //System.out.println("majhe");
                 ArrayList<StoredNode> nodeSuccessors = new ArrayList<StoredNode>();
-
+                //System.out.println("22");
                 for (int i = 0; i < tempSuccessors.size() ; i++) {
-
+                    //System.out.println("2");
                     StoredNode checkN = null;
 
                     if(heur ==1 ){
@@ -61,6 +55,25 @@ public class PuzzleSolver {
                         checkN = new StoredNode(temp, tempSuccessors.get(i), temp.getCost()+
                                 tempSuccessors.get(i).findCost(), ((EPSingleState)tempSuccessors.get(i)).getManhattanDistance());
                     }
+
+                    else if(heur ==3 ){
+
+                        checkN = new StoredNode(temp, tempSuccessors.get(i), temp.getCost()+
+                                tempSuccessors.get(i).findCost(), ((EPSingleState)tempSuccessors.get(i)).getEucllDist());
+                    }
+                    else if(heur ==4 ){
+                        //System.out.println("3");
+
+                        checkN = new StoredNode(temp, tempSuccessors.get(i), temp.getCost()+
+                                tempSuccessors.get(i).findCost(), ((EPSingleState)tempSuccessors.get(i)).getOutofRC());
+                    }
+                    else if(heur ==5 ){
+
+                        checkN = new StoredNode(temp, tempSuccessors.get(i), temp.getCost()+
+                                tempSuccessors.get(i).findCost(), ((EPSingleState)tempSuccessors.get(i)).getnMaxCost());
+                    }
+
+
 
                     if (!checkRepeats(checkN)) {
 
@@ -122,9 +135,11 @@ public class PuzzleSolver {
                     System.out.println();
                 }
 
-                System.out.println("The cost = "+temp.getCost());
+                //System.out.println("The cost = "+temp.getCost());
 
                 System.out.println("The number of node travelled= "+ stateCounter);
+
+                System.exit(0);
 
 
             }

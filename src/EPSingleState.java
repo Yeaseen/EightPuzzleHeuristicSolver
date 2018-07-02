@@ -10,14 +10,24 @@ public class EPSingleState implements StateInfo {
 
     private double ManhattanDist=0;
 
+    private double EucllDist=0;
+
+    private double OutofRC=0;
+
+    private double nMaxCost=0;
+
     private final int[] Goal={1,2,3,4,5,6,7,8,0};
 
     private int[] currentBoard;
 
 
+
+
     public EPSingleState(int[] board){
         currentBoard=board;
         setOutOfOrder();
+        setDistance();
+        //setNMaxCost();
     }
 
     private void setOutOfOrder(){
@@ -28,7 +38,7 @@ public class EPSingleState implements StateInfo {
         }
     }
 
-    private void setManhattanDistance(){
+    private void setDistance(){
 
         int idx=-1;
         for (int i = 0; i < 3 ; i++) {
@@ -43,12 +53,47 @@ public class EPSingleState implements StateInfo {
                     int horix= val%3;
                     int verty= val/3;
 
-                    ManhattanDist+= Math.abs(horix - j)+ Math.abs(verty - i);
+                    if(horix!=j) OutofRC++;
+                    if(verty!=i) OutofRC++;
+
+                    double x= Math.abs(horix - j);
+                    double y= Math.abs(verty - i);
+
+                    ManhattanDist+=x+y;
+                    EucllDist+= Math.sqrt((x*x) +(y*y));
                 }
 
             }
 
         }
+    }
+
+    private void setNMaxCost(){
+        int[] cpyB=copyBoard(currentBoard);
+        int[] locArray=new int[9];
+        while (!Arrays.equals(cpyB,Goal)){
+            for (int i = 0; i <cpyB.length ; i++) {
+                int val = cpyB[i];
+                if(val==0) locArray[8]=i;
+                else locArray[val-1] = i;
+            }
+
+            int temp= cpyB[locArray[8]];
+            cpyB[locArray[8]]=cpyB[locArray[locArray[8]]];
+            cpyB[locArray[locArray[8]]]=temp;
+            nMaxCost++;
+            System.out.println("hu");
+        }
+        System.out.println("leaving");
+//        for (int i = 0; i < 9; i++) {
+//            System.out.println(cpyB[i]+" ");
+//        }
+//        System.out.println();
+//        for (int i = 0; i < 9; i++) {
+//            System.out.println(locArray[i]+" ");
+//
+//        }
+
     }
 
     public double getManhattanDistance(){
@@ -57,6 +102,18 @@ public class EPSingleState implements StateInfo {
 
     public double getOutOfOrderValue(){
         return OutofOrder;
+    }
+
+    public double getEucllDist() {
+        return EucllDist;
+    }
+
+    public double getOutofRC() {
+        return OutofRC;
+    }
+
+    public double getnMaxCost() {
+        return nMaxCost;
     }
 
     @Override
@@ -69,35 +126,41 @@ public class EPSingleState implements StateInfo {
 
     @Override
     public ArrayList<StateInfo> getSuccessors() {
+
         int holeIdx=getHoleIndex();
 
         ArrayList<StateInfo> successors= new ArrayList<StateInfo>();
 
         if(holeIdx !=0 && holeIdx !=3 && holeIdx !=6){
+            //System.out.println("chole");
             swapAndStore(holeIdx-1,holeIdx,successors);
         }
 
         if(holeIdx !=2 && holeIdx !=5 && holeIdx !=8){
+            //System.out.println("chole");
             swapAndStore(holeIdx+1,holeIdx,successors);
         }
 
         if(holeIdx !=0 && holeIdx !=1 && holeIdx !=2){
+
             swapAndStore(holeIdx-3,holeIdx,successors);
         }
 
         if(holeIdx !=6 && holeIdx !=7 && holeIdx !=8){
+            //System.out.println("chole +3");
             swapAndStore(holeIdx+3,holeIdx,successors);
         }
-
+        System.out.println("ok");
         return successors;
     }
 
     private void swapAndStore(int s,int c,ArrayList<StateInfo> state){
-
         int[] cpy= copyBoard(currentBoard);
+
         int temp=cpy[s];
         cpy[s]=currentBoard[c];
         cpy[c]=temp;
+
         state.add(new EPSingleState(cpy));
     }
 
@@ -149,6 +212,7 @@ public class EPSingleState implements StateInfo {
         for (int i = 0; i < puzzleSize ; i++) {
             if(currentBoard[i]==0) holeIdx=i;
         }
+        //System.out.println(holeIdx);
         return holeIdx;
     }
 
