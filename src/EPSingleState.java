@@ -87,17 +87,6 @@ public class EPSingleState implements StateInfo {
             nMaxCost++;
             //System.out.println("hu");
         }
-        //System.out.println("leaving");
-//        for (int i = 0; i < 9; i++) {
-//            System.out.print(cpyB[i]+" ");
-//        }
-//        System.out.println();
-//        for (int i = 0; i < 9; i++) {
-//            System.out.print(locArray[i]+" ");
-//
-//        }
-
-
     }
 
     public double getManhattanDistance(){
@@ -136,12 +125,12 @@ public class EPSingleState implements StateInfo {
         ArrayList<StateInfo> successors= new ArrayList<StateInfo>();
 
         if(holeIdx !=0 && holeIdx !=3 && holeIdx !=6){
-            //System.out.println("chole");
+
             swapAndStore(holeIdx-1,holeIdx,successors);
         }
 
         if(holeIdx !=2 && holeIdx !=5 && holeIdx !=8){
-            //System.out.println("chole");
+
             swapAndStore(holeIdx+1,holeIdx,successors);
         }
 
@@ -151,10 +140,10 @@ public class EPSingleState implements StateInfo {
         }
 
         if(holeIdx !=6 && holeIdx !=7 && holeIdx !=8){
-            //System.out.println("chole +3");
+
             swapAndStore(holeIdx+3,holeIdx,successors);
         }
-        //System.out.println("ok");
+
         return successors;
     }
 
