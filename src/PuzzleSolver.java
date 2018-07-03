@@ -8,17 +8,28 @@ public class PuzzleSolver {
     public static void main(String[] args) {
 
 
-        int heur=Integer.parseInt(args[0]);
 
 
 
-        int[] startingStateBoard=dispatchEightPuzzle(args,1);
 
-        //EPSingleState s= new EPSingleState(startingStateBoard);
-        //double x=s.getnMaxCost();
-        //System.out.println(x);
+        if(args.length>2) {
+            int heur=Integer.parseInt(args[0]);
+            int[] startingStateBoard = dispatchEightPuzzle(args, 1);
 
-        AStarSearch(startingStateBoard,heur);
+            //EPSingleState s= new EPSingleState(startingStateBoard);
+            //double x=s.getnMaxCost();
+            //System.out.println(x);
+
+            AStarSearch(startingStateBoard, heur);
+        }
+        else {
+            int gridSize=Integer.parseInt(args[0]);
+            int[][] startingGrid= dispatchGrid(gridSize);
+            GridState s=new GridState(startingGrid);
+            s.printState();
+
+
+        }
 
     }
 
@@ -135,7 +146,7 @@ public class PuzzleSolver {
                     System.out.println();
                 }
 
-                //System.out.println("The cost = "+temp.getCost());
+                System.out.println("The cost = "+temp.getCost());
 
                 System.out.println("The number of node travelled= "+ stateCounter);
 
@@ -180,6 +191,32 @@ public class PuzzleSolver {
         }
 
         return retValue;
+    }
+
+    private static int[][] dispatchGrid(int n){
+
+        Random rand = new Random();
+        int cnt= (n*n*20)/100;
+        int[][] initState= new int[n][n];
+        for (int i = 0; i < n ; i++) {
+
+            for (int j = 0; j < n ; j++) {
+                initState[i][j]=0;
+            }
+
+        }
+
+        while (cnt!=0){
+            int x=rand.nextInt(n-1)+0;
+            int y=rand.nextInt(n-1)+0;
+            if(initState[x][y]==0){
+                initState[x][y]=1;
+                cnt--;
+            }
+        }
+
+        return initState;
+
     }
 
 }

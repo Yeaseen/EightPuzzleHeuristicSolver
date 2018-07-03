@@ -27,7 +27,7 @@ public class EPSingleState implements StateInfo {
         currentBoard=board;
         setOutOfOrder();
         setDistance();
-        //setNMaxCost();
+        setNMaxCost();
     }
 
     private void setOutOfOrder(){
@@ -77,22 +77,26 @@ public class EPSingleState implements StateInfo {
                 if(val==0) locArray[8]=i;
                 else locArray[val-1] = i;
             }
-
+            if(cpyB[locArray[8]] == cpyB[locArray[locArray[8]]]){
+                //System.out.println("dhora");
+                break;
+            }
             int temp= cpyB[locArray[8]];
             cpyB[locArray[8]]=cpyB[locArray[locArray[8]]];
             cpyB[locArray[locArray[8]]]=temp;
             nMaxCost++;
-            System.out.println("hu");
+            //System.out.println("hu");
         }
-        System.out.println("leaving");
+        //System.out.println("leaving");
 //        for (int i = 0; i < 9; i++) {
-//            System.out.println(cpyB[i]+" ");
+//            System.out.print(cpyB[i]+" ");
 //        }
 //        System.out.println();
 //        for (int i = 0; i < 9; i++) {
-//            System.out.println(locArray[i]+" ");
+//            System.out.print(locArray[i]+" ");
 //
 //        }
+
 
     }
 
@@ -150,7 +154,7 @@ public class EPSingleState implements StateInfo {
             //System.out.println("chole +3");
             swapAndStore(holeIdx+3,holeIdx,successors);
         }
-        System.out.println("ok");
+        //System.out.println("ok");
         return successors;
     }
 
